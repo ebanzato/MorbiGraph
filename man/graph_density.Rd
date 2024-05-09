@@ -24,8 +24,10 @@ and the total number of possible edges.
 The total number of possible edges for a graph with p nodes is p(p-1)/2.
 }
 \examples{
+
 library(igraph)
-g <- make_graph(c(1,2,2,3,3,1,3,4,4,5,5,6,6,3,6,4),directed=F)
-graph_density(g)
+g <- igraph::make_graph(c(1,2,2,3,3,1,3,4,4,5,5,6,6,3,6,4),directed=F)
+
+d <- graph_density(g)
 
 }

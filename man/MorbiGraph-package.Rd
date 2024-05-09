@@ -8,4 +8,8 @@
 \description{
 Graphical models for multimorbidity pattern analysis
 }
+\author{
+\strong{Maintainer}: Erika Banzato \email{erika.banzato@unipd.it} (\href{https://orcid.org/0000-0002-2137-9166}{ORCID}) [funder]
+
+}
 \keyword{internal}

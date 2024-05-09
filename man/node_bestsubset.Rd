@@ -4,7 +4,7 @@
 \alias{node_bestsubset}
 \title{Node-wise best subset selection}
 \usage{
-node_bestsubset(data, v.conf = NULL, IC = "BICg", rule = "AND")
+node_bestsubset(data, v.conf = NULL, IC = "EBIC", rule = "AND")
 }
 \arguments{
 \item{data}{a matrix or a dataframe containing all the variables. All columns must be named.}
@@ -22,9 +22,11 @@ The function returns the estimated adjacency matrix of the graph.
 Structure learning of the graph achieved through best subset selection.
 }
 \examples{
+
 set.seed(1)
 df <- matrix(sample(0:1,100,replace=T),ncol=5)
 colnames(df) <- paste0('X',1:5)
-node_bestsubset(df)
+
+net <- node_bestsubset(df)
 
 }

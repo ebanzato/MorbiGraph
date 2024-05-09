@@ -20,12 +20,14 @@ and a column with the frequency of each combination.
 Compute a summarized matrix of the contingency table of the dataframe.
 }
 \examples{
+
 set.seed(1)
 x <- sample(c(0,1), 100, replace = T)
 y <- sample(c(0,1), 100, replace = T)
 z <- sample(c(0,1), 100, replace = T)
 df <- cbind(x, y, z)
-freq_table(df)
+
+ftab <- freq_table(df)
 
 }
 \keyword{internal}
