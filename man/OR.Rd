@@ -9,7 +9,7 @@ OR(data, test = FALSE)
 \arguments{
 \item{data}{A matrix where each column is a variable.}
 
-\item{test}{a logical indicating whether to perform chi-squared contingency table test.}
+\item{test}{a logical indicating whether to perform chi-squared test for contingency tables.}
 }
 \value{
 A symmetric matrix of odds ratios.

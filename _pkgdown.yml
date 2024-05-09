@@ -1,0 +1,61 @@
+url: https://github.com/ebanzato/MorbiGraph
+
+development:
+  mode: unreleased
+  destination: dev
+  version_label: default
+
+template:
+  params:
+    bootstrap: 5
+    bootswatch: cosmo
+
+navbar:
+#  type: inverse
+  structure:
+    left: [home, reference]
+    right:  [github, rpro]
+
+components:
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/ebanzato/MorbiGraph
+    reference:
+      text: "Reference"
+      icon: fa-book
+      href: reference/index.html
+    home:
+      text: "Home"
+      icon: fa-home
+      href: index.html
+
+reference:
+
+- title: Graph estimation
+  desc:  Functions for graph estimation
+- contents:
+  - estimate_graph
+  - node_stepwise
+  - node_bestsubset
+
+- title: Summary statistics
+  desc: Functions for summarize the network
+- contents:
+  - qYule
+  - graph_density
+
+- title: Utilities
+- contents:
+  - freq_table
+  - mFormula
+  - OR
+  - OR_tab
+
+
+
+
+
+
+
+
+

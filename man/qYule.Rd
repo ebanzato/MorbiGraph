@@ -4,13 +4,17 @@
 \alias{qYule}
 \title{Yule's Q}
 \usage{
-qYule(OR)
+qYule(x, OR = TRUE)
 }
 \arguments{
-\item{OR}{A vector or a symmetric matrix of odds ratios.}
+\item{x}{A symmetric matrix of odds ratios or a dataframe with variables
+for which to compute the coefficients.}
+
+\item{OR}{logical indicating if the input is a matrix of odds ratios (TRUE) or a dataframe (FALSE).}
 }
 \value{
-A vector or a matrix with Q coefficients computed from the OR.
+A symmetric matrix with the Q coefficients computed from the OR or the dataframe.
+
 Values of Q can vary between -1 and 1.
 −1 reflects total negative association,
 +1 reflects perfect positive association,

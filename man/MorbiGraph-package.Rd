@@ -4,8 +4,8 @@
 \name{MorbiGraph-package}
 \alias{MorbiGraph}
 \alias{MorbiGraph-package}
-\title{MorbiGraph: What the Package Does (Title Case)}
+\title{MorbiGraph: Graphical models for multimorbidity pattern analysis}
 \description{
-More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.
+Graphical models for multimorbidity pattern analysis
 }
 \keyword{internal}
