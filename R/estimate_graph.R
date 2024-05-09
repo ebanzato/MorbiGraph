@@ -11,6 +11,7 @@
 #' @param conf.int confidence level required. Default is NULL and only the matrix with the p-values is returned.
 #' @param OR logical. If TRUE the function returns an adjacency matrix with odds-ratios, if FALSE with log(OR).
 #' @param edge.table logical. If TRUE the function returns the graph also in dataframe mode.
+#' @param progressbar Logical. Should the progress bar be plotted in order to see the progress of the estimation procedure?
 #'
 #' @return The function returns the estimated weighted adjacency matrix of the graph and a matrix with the associated p-values.
 #'         If conf.int is not null, a matrix with all the associations and the corresponding confidence intervals will be returned.
@@ -22,21 +23,21 @@
 #' df <- as.data.frame(ifelse(mvtnorm::rmvnorm(1000, sigma=S) > 0, 1, 0))
 #' colnames(df) <- paste0('X',1:3)
 #'
-#' g <- estimate_graph(df, method='stepwise', direction='backward')
+#' g <- estimate_graph(df, method='stepwise', direction='backward', progressbar=FALSE)
 #'
 #' @export
-estimate_graph = function(data, v.conf=NULL, method='IsingFit', direction=NULL, IC='EBIC', rule='AND', OR=TRUE, conf.int=NULL, edge.table=FALSE){
+estimate_graph = function(data, v.conf=NULL, method='IsingFit', direction=NULL, IC='EBIC', rule='AND', OR=TRUE, conf.int=NULL, edge.table=FALSE, progressbar=FALSE){
 
   # learn the structure
   if(method=='stepwise'){
-    adjm = node_stepwise(data, v.conf=v.conf, direction=direction, IC=IC, rule=rule)
+    adjm = node_stepwise(data, v.conf=v.conf, direction=direction, IC=IC, rule=rule, progressbar=progressbar)
   }
   if(method=='bestsubset'){
-    adjm = node_bestsubset(data, v.conf=v.conf, IC=IC, rule=rule)
+    adjm = node_bestsubset(data, v.conf=v.conf, IC=IC, rule=rule, progressbar=progressbar)
   }
   if(method=='IsingFit'){
     AND = ifelse(rule=='AND', TRUE, FALSE)
-    ifit = IsingFit::IsingFit(data, family='binomial', AND=AND, gamma=0.25, plot=FALSE)
+    ifit = IsingFit::IsingFit(data, family='binomial', AND=AND, gamma=0.25, plot=FALSE, progressbar=progressbar)
     adjm = ifelse(ifit$weiadj == 0, 0, 1)
 
     if(!is.null(v.conf)){
