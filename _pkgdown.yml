@@ -46,10 +46,10 @@ reference:
 
 - title: Utilities
 - contents:
-  - freq_table
-  - mFormula
   - OR
   - OR_tab
+  - mFormula
+  - freq_table
 
 
 
