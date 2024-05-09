@@ -8,12 +8,14 @@
 #' If \code{test=TRUE} it returns the pvalues for the test computed for each 2x2 table.
 #'
 #' @examples
+#'
 #' set.seed(1)
 #' x <- sample(c(0,1), 100, replace = T)
 #' y <- sample(c(0,1), 100, replace = T)
 #' z <- sample(c(0,1), 100, replace = T)
 #' df <- cbind(x, y, z)
-#' OR(df)
+#'
+#' or <- OR(df)
 #'
 #' @export
 #'

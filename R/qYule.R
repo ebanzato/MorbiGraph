@@ -19,14 +19,12 @@
 #'
 #' @examples
 #'
-#' # single value
-#' qYule(1.5)
-#'
 #' # matrix of odds ratios
 #' OR <- matrix(c(1, 3.5, 0.1,
 #'                3.5, 1, 1.3,
 #'                0.1, 1.3, 1), ncol=3)
-#' qYule(OR)
+#'
+#' q <- qYule(OR)
 #'
 #' @export
 #'

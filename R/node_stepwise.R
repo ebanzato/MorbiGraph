@@ -11,10 +11,12 @@
 #' @return The function returns the estimated adjacency matrix of the graph.
 #'
 #' @examples
+#'
 #' set.seed(1)
 #' df <- matrix(sample(0:1,100,replace=T),ncol=5)
 #' colnames(df) <- paste0('X',1:5)
-#' node_stepwise(df)
+#'
+#' net <- node_stepwise(df)
 #'
 #' @export
 #'

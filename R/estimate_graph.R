@@ -16,11 +16,13 @@
 #'         If conf.int is not null, a matrix with all the associations and the corresponding confidence intervals will be returned.
 #'
 #' @examples
+#'
 #' set.seed(1)
-#' S = solve(matrix(c(1,0.2,0,0.2,1,0.9,0,0.9,1), ncol=3))
-#' df = as.data.frame(ifelse(mvtnorm::rmvnorm(1000, sigma=S)>0,1,0))
+#' S <- solve(matrix(c(2,0.9,0,0.9,2,0.9,0,0.9,2), ncol=3))
+#' df <- as.data.frame(ifelse(mvtnorm::rmvnorm(1000, sigma=S)>0,1,0))
 #' colnames(df) <- paste0('X',1:3)
-#' estimate_graph(df, method='stepwise',direction='backward')
+#'
+#' g <- estimate_graph(df, method='stepwise',direction='backward')
 #'
 #' @export
 estimate_graph = function(data, v.conf=NULL, method='IsingFit', direction=NULL, IC='EBIC', rule='AND', OR=TRUE, conf.int=NULL, edge.table=FALSE){

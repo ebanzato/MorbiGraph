@@ -2,12 +2,16 @@
 #'
 #' @param x A vector.
 #' @param y A vector.
+#'
 #' @return A number. First it creates a 2x2 table and then it computes the odds ratio.
+#'
 #' @examples
+#'
 #' set.seed(1)
 #' x <- sample(c(0,1), 100, replace = T)
 #' y <- sample(c(0,1), 100, replace = T)
-#' OR_tab(x,y)
+#'
+#' or <- OR_tab(x,y)
 #'
 #' @keywords internal
 OR_tab = function(x, y){

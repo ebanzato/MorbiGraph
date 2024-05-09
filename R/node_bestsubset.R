@@ -10,17 +10,23 @@
 #' @return The function returns the estimated adjacency matrix of the graph.
 #'
 #' @examples
+#'
 #' set.seed(1)
 #' df <- matrix(sample(0:1,100,replace=T),ncol=5)
 #' colnames(df) <- paste0('X',1:5)
-#' node_bestsubset(df)
+#'
+#' net <- node_bestsubset(df)
 #'
 #' @export
 #'
-node_bestsubset = function(data, v.conf=NULL, IC='BICg', rule='AND'){
+node_bestsubset = function(data, v.conf=NULL, IC='EBIC', rule='AND'){
 
   if(!IC %in% c("AIC", "BIC", "EBIC")){
     stop('\'IC\' should be one of "AIC", "EBIC"')
+  }
+
+  if(IC=='EBIC'){
+    IC = 'BICg'
   }
 
   if(is.matrix(data)){
