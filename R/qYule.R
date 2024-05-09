@@ -6,9 +6,12 @@
 #' Q = (OR-1)/(OR+1),
 #' where OR is the odds ratio.
 #'
-#' @param OR A vector or a symmetric matrix of odds ratios.
+#' @param x A symmetric matrix of odds ratios or a dataframe with variables
+#'             for which to compute the coefficients.
+#' @param OR logical indicating if the input is a matrix of odds ratios (TRUE) or a dataframe (FALSE).
 #'
-#' @return A vector or a matrix with Q coefficients computed from the OR.
+#' @return A symmetric matrix with the Q coefficients computed from the OR or the dataframe.
+#'
 #' Values of Q can vary between -1 and 1.
 #' −1 reflects total negative association,
 #' +1 reflects perfect positive association,
@@ -27,16 +30,18 @@
 #'
 #' @export
 #'
-qYule = function(OR){
-  if(is.matrix(OR)){
-    if(isSymmetric(OR)){
-      Q = (OR-1)/(OR+1)
+qYule = function(x, OR=TRUE){
+
+  if(isTRUE(OR)){
+    if(isSymmetric(x)){
+      Q = (x-1)/(x+1)
       return(Q)
     }else{
       print('The OR matrix is not symmetric.')
     }
   }else{
-  Q = (OR-1)/(OR+1)
-  return(Q)
+    or = OR(x)
+    Q = (x-1)/(x+1)
+    return(Q)
   }
 }
