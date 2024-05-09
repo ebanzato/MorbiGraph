@@ -15,7 +15,6 @@
 #'
 #' @examples
 #'
-#' library(igraph)
 #' g <- igraph::make_graph(c(1,2,2,3,3,1,3,4,4,5,5,6,6,3,6,4),directed=F)
 #'
 #' d <- graph_density(g)

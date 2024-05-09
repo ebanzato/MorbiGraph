@@ -6,6 +6,7 @@
 #' @param v.conf A string with the names of the confounding variables. By design, the associations between them will be zero.
 #' @param IC information criteria to use: "AIC", "BIC", "EBIC".
 #' @param rule Can be "AND" or "OR" to indicate whether the AND-rule or the OR-rule should be used to define the edges in the network.
+#' @param progressbar Logical. Should the progress bar be plotted in order to see the progress of the estimation procedure?
 #'
 #' @return The function returns the estimated adjacency matrix of the graph.
 #'
@@ -19,10 +20,10 @@
 #'
 #' @export
 #'
-node_bestsubset = function(data, v.conf=NULL, IC='EBIC', rule='AND'){
+node_bestsubset = function(data, v.conf=NULL, IC='EBIC', rule='AND', progressbar=FALSE){
 
   if(!IC %in% c("AIC", "BIC", "EBIC")){
-    stop('\'IC\' should be one of "AIC", "EBIC"')
+    stop('\'IC\' should be one of "AIC", "BIC", "EBIC"')
   }
 
   if(IC=='EBIC'){
@@ -51,10 +52,13 @@ node_bestsubset = function(data, v.conf=NULL, IC='EBIC', rule='AND'){
   adj1 = matrix(FALSE, ncol=p, nrow=p)
   colnames(adj1) = rownames(adj1) = colnames(data)
 
+  if(isTRUE(progressbar)){
+    pb = txtProgressBar(min = 0, max = length(v.net), style = 3, width = 50, char = "=")
+  }
+
   ## Xi|X_i regressions
   # if v.corr is not null, do not consider those variables
   for(varY in 1:length(v.net)){
-    print(paste0(varY,'/',length(v.net)))
 
     # order the variables in Xy
     varXY = c(colnames(data)[-varY], colnames(data)[varY])
@@ -63,6 +67,8 @@ node_bestsubset = function(data, v.conf=NULL, IC='EBIC', rule='AND'){
 
     v.select = as.matrix(m.selec$BestModels[1,-ncol(m.selec$BestModels)],nrow=1)
     adj1[varY, -varY] = v.select
+
+    if(isTRUE(progressbar)){setTxtProgressBar(pb, varY)}
   }
 
   # Select edges with the and/or rule
@@ -76,6 +82,8 @@ node_bestsubset = function(data, v.conf=NULL, IC='EBIC', rule='AND'){
   if(rule=='OR'){
     adjmatrix = ifelse(mat_and_or[1:length(v.net),1:length(v.net)] > 0, 1, 0)
   }
+
+  if(isTRUE(progressbar)){close(pb)}
 
   # out
   mat_and_or[1:length(v.net),1:length(v.net)] = adjmatrix

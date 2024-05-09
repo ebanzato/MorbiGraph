@@ -9,7 +9,8 @@ node_stepwise(
   v.conf = NULL,
   direction = "backward",
   IC = "EBIC",
-  rule = "AND"
+  rule = "AND",
+  progressbar = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ node_stepwise(
 \item{IC}{information criteria to use: "AIC", "BIC", "EBIC".}
 
 \item{rule}{Can be "AND" or "OR" to indicate whether the AND-rule or the OR-rule should be used to define the edges in the network.}
+
+\item{progressbar}{Logical. Should the progress bar be plotted in order to see the progress of the estimation procedure?}
 }
 \value{
 The function returns the estimated adjacency matrix of the graph.

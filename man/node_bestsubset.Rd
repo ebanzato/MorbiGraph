@@ -4,7 +4,13 @@
 \alias{node_bestsubset}
 \title{Node-wise best subset selection}
 \usage{
-node_bestsubset(data, v.conf = NULL, IC = "EBIC", rule = "AND")
+node_bestsubset(
+  data,
+  v.conf = NULL,
+  IC = "EBIC",
+  rule = "AND",
+  progressbar = FALSE
+)
 }
 \arguments{
 \item{data}{a matrix or a dataframe containing all the variables. All columns must be named.}
@@ -14,6 +20,8 @@ node_bestsubset(data, v.conf = NULL, IC = "EBIC", rule = "AND")
 \item{IC}{information criteria to use: "AIC", "BIC", "EBIC".}
 
 \item{rule}{Can be "AND" or "OR" to indicate whether the AND-rule or the OR-rule should be used to define the edges in the network.}
+
+\item{progressbar}{Logical. Should the progress bar be plotted in order to see the progress of the estimation procedure?}
 }
 \value{
 The function returns the estimated adjacency matrix of the graph.

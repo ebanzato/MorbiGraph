@@ -7,6 +7,7 @@
 #' @param direction the mode of stepwise search, can be one of "backward" or "forward".
 #' @param IC information criteria to use: "AIC", "BIC", "EBIC".
 #' @param rule Can be "AND" or "OR" to indicate whether the AND-rule or the OR-rule should be used to define the edges in the network.
+#' @param progressbar Logical. Should the progress bar be plotted in order to see the progress of the estimation procedure?
 #'
 #' @return The function returns the estimated adjacency matrix of the graph.
 #'
@@ -20,7 +21,7 @@
 #'
 #' @export
 #'
-node_stepwise = function(data, v.conf=NULL, direction='backward', IC='EBIC', rule='AND'){
+node_stepwise = function(data, v.conf=NULL, direction='backward', IC='EBIC', rule='AND', progressbar=FALSE){
 
   if(is.matrix(data)){
     if(is.null(colnames(data))){
@@ -59,10 +60,12 @@ node_stepwise = function(data, v.conf=NULL, direction='backward', IC='EBIC', rul
   adj1 = matrix(FALSE, ncol=p, nrow=p)
   colnames(adj1) = rownames(adj1) = colnames(data)
 
+  if(isTRUE(progressbar)){
+    pb = txtProgressBar(min = 0, max = length(v.net), style = 3, width = 50, char = "=")
+  }
   ## Xi|X_i regressions
   # if v.corr is not null, do not consider those variables
   for(varY in 1:length(v.net)){
-    print(paste0(varY,'/',length(v.net)))
 
     full = paste0(v.net[varY],' ~ .')
     empt = paste0(v.net[varY],' ~ 1')
@@ -84,6 +87,8 @@ node_stepwise = function(data, v.conf=NULL, direction='backward', IC='EBIC', rul
 
     v.select = names(coef(m.selec)[!names(coef(m.selec)) %in% c('(Intercept)')])
     adj1[varY, -varY] = colnames(data)[-varY] %in% v.select
+
+    if(isTRUE(progressbar)){setTxtProgressBar(pb, varY)}
   }
 
   # Select edges with the and/or rule
@@ -97,6 +102,8 @@ node_stepwise = function(data, v.conf=NULL, direction='backward', IC='EBIC', rul
   if(rule=='OR'){
     adjmatrix = ifelse(mat_and_or[1:length(v.net),1:length(v.net)] > 0, 1, 0)
   }
+
+  if(isTRUE(progressbar)){close(pb)}
 
   # out
   mat_and_or[1:length(v.net),1:length(v.net)] = adjmatrix
