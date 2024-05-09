@@ -1,7 +1,7 @@
 #' Odds ratio of dichotomous variables
 #'
 #' @param data A matrix where each column is a variable.
-#' @param test a logical indicating whether to perform chi-squared contingency table test.
+#' @param test a logical indicating whether to perform chi-squared test for contingency tables.
 #'
 #' @return A symmetric matrix of odds ratios.
 #' For each pair of variables, it creates a 2x2 contingency table and then it computes the odds ratio.
