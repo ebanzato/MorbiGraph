@@ -18,10 +18,9 @@ OR_tab = function(x, y){
   tab = prop.table(table(x, y))
   num = (tab[1,1]*tab[2,2])
   den = (tab[1,2]*tab[2,1])
-  if(abs(den)>0.00001){
-    OR  = num/den
-    return(OR)
-  }else{
-    stop('OR undefined')
+  if(abs(den)<0.00001){
+    warning('OR undefined')
   }
+  OR  = num/den
+  return(OR)
 }
